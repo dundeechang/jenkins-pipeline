@@ -7,7 +7,7 @@ pipeline {
             }
             steps {
                 echo 'Building..'
-                git branch: 'gtest', url: 'https://github.com/allyusd/helloworld.cpp.git'
+                git branch: 'gtest', url: 'https://github.com/dundeechang/helloworld.cpp.git'
                 sh 'g++ helloworld.cpp -o helloworld'
                 sh 'g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread'
             }
