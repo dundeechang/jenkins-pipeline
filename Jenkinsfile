@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                git 'https://github.com/allyusd/helloworld.cpp.git'
+                git 'https://github.com/dundeechang/helloworld.cpp.git'
                 sh 'g++ helloworld.cpp -o helloworld'
             }
         }
