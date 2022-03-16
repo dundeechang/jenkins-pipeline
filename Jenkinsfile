@@ -1,20 +1,41 @@
 pipeline {
-    agent any
-
+    agent none
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+        stage('parallel') {
+            parallel {
+                stage('alpine') {
+                    agent {
+                        docker {
+                            label 'docker'
+                            image 'non-exist:fail'
+                        }
+                    }
+                    steps {
+                        sh 'cat /etc/*-release'
+                    }
+                }
+                stage('ubuntu') {
+                    agent {
+                        docker {
+                            label 'docker'
+                            image 'ubuntu:20.04'
+                        }
+                    }
+                    steps {
+                        sh 'cat /etc/*-release'
+                    }
+                }
+                stage('archlinux') {
+                    agent {
+                        docker {
+                            label 'docker'
+                            image 'archlinux:base'
+                        }
+                    }
+                    steps {
+                        sh 'cat /etc/*-release'
+                    }
+                }
             }
         }
     }
